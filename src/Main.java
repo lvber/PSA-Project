@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
  * Created by lvbowen on 7/2/18.
  */
 public class Main {
-    private static Integer MAX_CONTAINER_NUMBER = 4000;
-    private static Integer MAX_CLUSTER_NUMBER = 11;
-    private static Integer MAX_POSITION_NUMBER = 201;
+    private static Integer MAX_CONTAINER_NUMBER = 1200;
+    private static Integer MAX_CLUSTER_NUMBER = 3;
+    private static Integer MAX_POSITION_NUMBER = 200;
     private static Integer MAX_TIER_NUMBER = 5;
-    private static Integer MAX_COLOR_CODE = 6;
+    private static Integer MAX_COLOR_CODE = 2;
     private static ArrayList<Container> containerArrayList = new ArrayList<Container>();
     private static Container[][][] storage = new Container[MAX_CLUSTER_NUMBER][MAX_POSITION_NUMBER][MAX_TIER_NUMBER];
     private static HashMap<Integer,String> color_dict = new HashMap<Integer,String>();
@@ -26,6 +26,13 @@ public class Main {
         color_dict.put(3,"green");
         color_dict.put(4,"blue");
         color_dict.put(5,"indigo");
+        if(MAX_CONTAINER_NUMBER > MAX_CLUSTER_NUMBER * MAX_POSITION_NUMBER * MAX_TIER_NUMBER){
+            System.out.println("Invalid number of containers.");
+            System.exit(0);
+        } else if(MAX_COLOR_CODE > 6 || MAX_COLOR_CODE < 0){
+            System.out.println("Invalid number of color code.");
+            System.exit(0);
+        }
     }
 
     public static void main(String [] args){
@@ -167,7 +174,7 @@ public class Main {
         System.out.println("===== Tier Color Info =====");
         for(int tier_number = 0; tier_number < MAX_TIER_NUMBER; tier_number++){
             for(int color_code = 0; color_code < MAX_COLOR_CODE; color_code++){
-                System.out.println("Tier " + tier_number + " has " + cluster_color_matrix[tier_number][color_code] + " " + color_dict.get(color_code) + " containers" );
+                System.out.println("Tier " + tier_number + " has " + tier_color_matrix[tier_number][color_code] + " " + color_dict.get(color_code) + " containers" );
             }
             System.out.println();
         }
